@@ -5,11 +5,13 @@ body {
   line-height: 1.6;
   background: #fff;
   color: #333;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
 }
 
 /* === Navbar === */
 .navbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   background: #fafafa;
@@ -21,16 +23,24 @@ body {
 
 .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+  font-size: clamp(1.5rem, 4vw, 1.8rem);
   font-weight: 700;
   color: #e69b00;
 }
 
+.navbar nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
 .navbar nav a {
-  margin-left: 1.5rem;
   text-decoration: none;
   color: #333;
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .navbar nav a:hover {
@@ -40,7 +50,6 @@ body {
 /* === Dropdown Menu === */
 .dropdown {
   position: relative;
-  display: inline-block;
 }
 
 .dropdown-content {
@@ -48,22 +57,22 @@ body {
   position: absolute;
   background-color: #fff;
   min-width: 160px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 999;
   top: 100%;
   left: 0;
 }
 
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 .dropdown-content a {
   color: #333;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   display: block;
   text-decoration: none;
   font-weight: 500;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
 }
 
 .dropdown-content a:hover {
@@ -79,6 +88,7 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
+  text-align: center;
 }
 
 .hero .overlay {
@@ -90,21 +100,21 @@ body {
 }
 
 .hero-text {
-  font-size: 1.5em;
+  font-size: clamp(1.2rem, 4vw, 2rem);
   position: relative;
   z-index: 1;
-  text-align: center;
   font-family: 'Playfair Display', serif;
 }
 
-/* === Intro & Themed Sections === */
-.intro, .flavor-section, .shop-section, .about-section {
+/* === Section Base === */
+.section {
   padding: 3rem 2rem;
   text-align: center;
   background-size: cover;
   background-position: center;
 }
 
+/* === Individual Sections === */
 .intro {
   background-image: url('../images/intro-bg.jpg');
 }
@@ -124,7 +134,7 @@ body {
 /* === Flavor Grid === */
 .flavor-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
@@ -144,6 +154,11 @@ body {
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.flavor-card button:hover {
+  background: #111;
 }
 
 /* === Featured Products === */
@@ -155,7 +170,7 @@ body {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -194,7 +209,7 @@ body {
   color: #555;
 }
 
-/* === Inspiration Section === */
+/* === Cooking Inspiration === */
 .inspiration {
   padding: 3rem 2rem;
   background-color: #f4f4f4;
@@ -214,7 +229,7 @@ body {
   color: #444;
 }
 
-/* === Newsletter Signup === */
+/* === Newsletter === */
 .newsletter {
   padding: 3rem 2rem;
   background: #222;
@@ -224,12 +239,16 @@ body {
 
 .newsletter form {
   margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .newsletter input[type="email"] {
   padding: 0.7rem;
   width: 250px;
-  max-width: 90%;
+  max-width: 100%;
   border: none;
   border-radius: 5px 0 0 5px;
   outline: none;
@@ -257,6 +276,45 @@ body {
   background: #eee;
   font-size: 0.9rem;
   position: relative;
-  bottom: 0;
   width: 100%;
+}
+
+/* === Responsive Tweaks === */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .hero {
+    height: 60vh;
+    padding: 1rem;
+  }
+
+  .flavor-grid,
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsletter input[type="email"],
+  .newsletter button {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .newsletter button {
+    margin-top: 0.5rem;
+  }
 }
